@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f0f3ff",
+                    "on-secondary-container": "#6d000f",
+                    "primary-container": "#0d1b3e",
+                    "on-surface": "#111c2c",
+                    "on-primary": "#ffffff",
+                    "secondary": "#ac3235",
+                    "primary-fixed": "#dbe1ff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#454748",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#45464e",
+                    "surface-variant": "#d8e3fa",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-highest": "#d8e3fa",
+                    "surface-tint": "#515d84",
+                    "secondary-container": "#fd6d6b",
+                    "secondary-fixed": "#ffdad7",
+                    "outline-variant": "#c6c6cf",
+                    "background": "#f9f9ff",
+                    "tertiary-fixed": "#e1e3e4",
+                    "tertiary-container": "#1a1d1e",
+                    "surface-bright": "#f9f9ff",
+                    "on-primary-container": "#7784ad",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#ffb3af",
+                    "inverse-surface": "#263142",
+                    "primary": "#00020e",
+                    "surface-dim": "#cfdaf1",
+                    "surface-container-high": "#dee8ff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#010203",
+                    "inverse-primary": "#b9c5f2",
+                    "on-primary-fixed": "#0b1a3d",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "on-tertiary-fixed": "#191c1d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#39456b",
+                    "on-background": "#111c2c",
+                    "on-tertiary-container": "#838586",
+                    "surface": "#f9f9ff",
+                    "outline": "#76767f",
+                    "primary-fixed-dim": "#b9c5f2",
+                    "on-secondary-fixed-variant": "#8b1820",
+                    "on-secondary-fixed": "#410006",
+                    "surface-container": "#e7eeff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin": "auto",
+                    "xs": "4px",
+                    "xl": "120px",
+                    "base": "8px",
+                    "md": "32px",
+                    "lg": "64px",
+                    "sm": "16px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Work Sans", "sans-serif"],
+                    "label-bold": ["Work Sans", "sans-serif"],
+                    "headline-lg": ["Work Sans", "sans-serif"],
+                    "body-lg": ["Work Sans", "sans-serif"],
+                    "headline-md": ["Work Sans", "sans-serif"],
+                    "body-md": ["Work Sans", "sans-serif"]
+            },
+            "fontSize": {
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "26px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(0, 2, 14, 0.95) 0%, rgba(0, 2, 14, 0.6) 50%, rgba(0, 2, 14, 0.2) 100%);
+        }
+        .card-hover-effect {
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 2, 14, 0.12);
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            will-change: transform, opacity;
+        }
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Delay utility for staggered animations */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Parallax effect on hero image */
+        .parallax-container {
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+        .parallax-bg {
+            will-change: transform;
+            transition: transform 0.1s ease-out;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-white font-body-md text-on-surface selection:bg-secondary selection:text-white overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 transition-all duration-500 h-24 flex items-center">
+<nav class="max-w-7xl mx-auto w-full flex justify-between items-center px-8">
+<div class="flex items-center gap-4 group cursor-pointer">
+<img alt="Sky Benin" class="h-14 w-auto transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0uh44uQf7YXJPA8yfEWxu-Ao9RwKln2wSCBCaHW4_K_grgKptQa1sclmADM2n9D8Dq9a6TtNwEiFhIUpv842salS7QaU6ip6FUEME6FHSpwnKWyORdp5cFBptkfXrHkJgn6HxYykNOadnNTjiLzyEecVL6e7QJl6GloK0pDxPsCpBOmkmzisYen4CPQWoD0nud4w4y4b_j8UUB7OWmnH0Duo2SoEL_lME3Sl7sz2lUuaexdOKtXZ8OPFReMUB2lp2Ksd4OnxmW5-"/>
+<div class="flex flex-col">
+<span class="text-2xl font-black text-primary tracking-tighter leading-none">SKY BENIN</span>
+<span class="text-[10px] font-bold text-secondary tracking-[0.2em] uppercase">Construction</span>
+</div>
+</div>
+<div class="hidden lg:flex items-center gap-10">
+<a class="relative text-primary font-semibold text-sm uppercase tracking-widest group" href="#">
+                Services
+                <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary scale-x-100 transition-transform duration-300 origin-left"></span>
+</a>
+<a class="relative text-slate-500 font-semibold text-sm uppercase tracking-widest hover:text-primary transition-colors group" href="#">
+                Projects
+                <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+</a>
+<a class="relative text-slate-500 font-semibold text-sm uppercase tracking-widest hover:text-primary transition-colors group" href="#">
+                About
+                <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+</a>
+<a class="relative text-slate-500 font-semibold text-sm uppercase tracking-widest hover:text-primary transition-colors group" href="#">
+                Contact
+                <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+</a>
+</div>
+<button class="relative overflow-hidden bg-secondary text-white px-8 py-4 font-label-bold uppercase tracking-widest group transition-transform duration-300 hover:scale-105 active:scale-95">
+<span class="relative z-10">Request a Quote</span>
+<div class="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+</button>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-screen w-full overflow-hidden flex items-center pt-24">
+<div class="absolute inset-0 z-0 parallax-container">
+<img alt="Construction Hero" class="w-full h-[120%] object-cover absolute top-0 left-0 parallax-bg" id="hero-parallax" src="https://lh3.googleusercontent.com/aida/ADBb0uhLppU1W8ZWV0n6eZmU_Z2Z-0TGaGa3rZ3AewFlDTsmnKS4R2CZPKVC9KD2i6KXoXOzy-0GQlFQYQrOpAqtdnDT7jogsVHEsZJRkQZdRt6sKYWSVxGxZ9CQWt6r7-R8POBZ-lSMWHLn3UixnRSRUdOemN-JFqGTthdpnDzBKFT9C6j2IDqHx50kfoOLhZsN_5CZRC_0nHYyoUvwZAlW8-KlVY2zfKPatMyB-Wt0pPW1XdQJQu_j0YS79D4"/>
+<div class="absolute inset-0 hero-overlay"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-8 w-full">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-3 bg-secondary/10 backdrop-blur-sm border border-secondary/20 px-4 py-2 rounded-full mb-8 animate-[fadeIn_1s_ease-out]">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-secondary text-xs font-bold uppercase tracking-widest">Leader de la construction au Bénin</span>
+</div>
+<h1 class="font-headline-xl text-white mb-8 animate-[slideUp_1s_ease-out_0.2s_both]">Bâtir l'Avenir du Bénin avec Excellence</h1>
+<p class="font-body-lg text-white/80 mb-12 max-w-xl leading-relaxed animate-[slideUp_1s_ease-out_0.4s_both]">Expertise, Solidité et Innovation dans le BTP depuis plus de 10 ans. Nous transformons les visions architecturales en réalités durables.</p>
+<div class="flex flex-wrap gap-6 animate-[slideUp_1s_ease-out_0.6s_both]">
+<button class="group relative px-10 py-5 bg-secondary text-white font-label-bold uppercase tracking-widest overflow-hidden transition-transform hover:scale-105 active:scale-95">
+<span class="relative z-10">Voir nos projets</span>
+<div class="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></div>
+</button>
+<button class="group px-10 py-5 border-2 border-white/30 text-white font-label-bold uppercase tracking-widest hover:border-white transition-all backdrop-blur-sm hover:scale-105 active:scale-95">
+                        Nos Services
+                    </button>
+</div>
+</div>
+</div>
+<!-- Decorative Scroll Indicator -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-white/50 animate-bounce">
+<span class="text-[10px] uppercase tracking-[0.3em] font-bold">Scroll</span>
+<div class="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-xl bg-white reveal-on-scroll">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-lg">
+<span class="text-secondary font-label-bold uppercase tracking-[0.2em] text-xs">Nos Expertises</span>
+<h2 class="font-headline-lg text-primary mt-4 max-w-2xl mx-auto">Solutions de Construction Intégrées &amp; Innovantes</h2>
+<div class="w-20 h-1 bg-secondary mx-auto mt-6"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+<!-- Service 1 -->
+<div class="card-hover-effect bg-surface-bright p-10 border border-slate-100 group reveal-on-scroll delay-100">
+<div class="w-20 h-20 flex items-center justify-center bg-white shadow-sm mb-10 group-hover:bg-primary transition-colors duration-500">
+<span class="material-symbols-outlined text-5xl text-secondary group-hover:text-white transition-all duration-500 group-hover:rotate-12" data-icon="architecture">architecture</span>
+</div>
+<h3 class="font-headline-md text-primary mb-6 group-hover:text-secondary transition-colors duration-300">Construction de Bâtiments</h3>
+<p class="font-body-md text-slate-600 mb-8 leading-relaxed">Réalisation d'immeubles résidentiels, commerciaux et industriels de haute facture avec une précision millimétrée et des finitions d'exception.</p>
+<a class="inline-flex items-center gap-3 text-primary font-bold uppercase text-xs tracking-widest group/link hover:text-secondary transition-colors" href="#">
+                        En savoir plus 
+                        <span class="material-symbols-outlined text-lg transition-transform duration-300 group-hover/link:translate-x-3" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Service 2 -->
+<div class="card-hover-effect bg-surface-bright p-10 border border-slate-100 group reveal-on-scroll delay-200">
+<div class="w-20 h-20 flex items-center justify-center bg-white shadow-sm mb-10 group-hover:bg-primary transition-colors duration-500">
+<span class="material-symbols-outlined text-5xl text-secondary group-hover:text-white transition-all duration-500 group-hover:rotate-12" data-icon="engineering">engineering</span>
+</div>
+<h3 class="font-headline-md text-primary mb-6 group-hover:text-secondary transition-colors duration-300">Travaux Publics</h3>
+<p class="font-body-md text-slate-600 mb-8 leading-relaxed">Expertise dans le développement routier, les ouvrages d'art et les systèmes d'assainissement complexes pour le développement national.</p>
+<a class="inline-flex items-center gap-3 text-primary font-bold uppercase text-xs tracking-widest group/link hover:text-secondary transition-colors" href="#">
+                        En savoir plus 
+                        <span class="material-symbols-outlined text-lg transition-transform duration-300 group-hover/link:translate-x-3" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Service 3 -->
+<div class="card-hover-effect bg-surface-bright p-10 border border-slate-100 group reveal-on-scroll delay-300">
+<div class="w-20 h-20 flex items-center justify-center bg-white shadow-sm mb-10 group-hover:bg-primary transition-colors duration-500">
+<span class="material-symbols-outlined text-5xl text-secondary group-hover:text-white transition-all duration-500 group-hover:rotate-12" data-icon="home_repair_service">home_repair_service</span>
+</div>
+<h3 class="font-headline-md text-primary mb-6 group-hover:text-secondary transition-colors duration-300">Rénovation &amp; Design</h3>
+<p class="font-body-md text-slate-600 mb-8 leading-relaxed">Modernisation structurelle et réhabilitation haut de gamme pour redonner vie et valeur ajoutée à vos actifs immobiliers existants.</p>
+<a class="inline-flex items-center gap-3 text-primary font-bold uppercase text-xs tracking-widest group/link hover:text-secondary transition-colors" href="#">
+                        En savoir plus 
+                        <span class="material-symbols-outlined text-lg transition-transform duration-300 group-hover/link:translate-x-3" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Projects -->
+<section class="py-xl bg-slate-50 reveal-on-scroll">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-lg gap-8">
+<div class="max-w-xl">
+<span class="text-secondary font-label-bold uppercase tracking-[0.2em] text-xs">Notre Portefeuille</span>
+<h2 class="font-headline-lg text-primary mt-4">Projets Phares &amp; Réalisations Iconiques au Bénin</h2>
+</div>
+<button class="group flex items-center gap-3 border-2 border-primary text-primary px-8 py-4 font-label-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all hover:scale-105 active:scale-95">
+                    Galerie Complète
+                    <span class="material-symbols-outlined text-lg group-hover:translate-x-2 transition-transform" data-icon="grid_view">grid_view</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<!-- Project 1 -->
+<div class="relative group overflow-hidden bg-white shadow-xl reveal-on-scroll delay-100">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Sky Tower" class="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB14hkHxu6az5KOQDnznm13bxRFgdYLOb2kGVQZTzvmDvMOgTlUFBJIvldWSSzTJ3Knld7B9Y2q-ujloq91Xtw5EIORxS2wMg1WJx3hgKqlPhP-ECNJiDp1AsGygS4zfcINcqJ7HeQycgDe7O4m1iGfeXY71XRcek_tmNMFZQR-JR7O4139-ZqINzkO69DjEX1lil5Ntcf0GLTjHD6REnog2rbWqf27FAqVj7Sd0MclWsMNS2_90-D9gtZJQ1VWRNAFVbI7_0e2mug"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="absolute bottom-0 left-0 right-0 p-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+<span class="inline-block bg-secondary text-white text-[10px] px-4 py-1.5 font-bold uppercase tracking-widest mb-4">En Cours</span>
+<h4 class="text-white text-3xl font-bold mb-2">Sky Tower Business Center</h4>
+<p class="text-white/60 font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="location_on">location_on</span>
+                            Cotonou, Bénin
+                        </p>
+</div>
+<div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary hover:bg-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="relative group overflow-hidden bg-white shadow-xl reveal-on-scroll delay-200">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Pont Porto-Novo" class="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLxa5_pC1QYVxkxfdvhbhYl1sWr2Bl2Wo8_78AB4oaaPhRl-Px40Khs2X-9lS-6OMskjE4nosnCd217ph9w4qd0sldZ0syxG57xWXktE3ZVqYMF6tZ76Np3HFwNPCUcWLfakho8S5VVfRaf3_BP0Eu0iMICXbvBfxIZ-AnKdCpbdxPUUkG02DFtHQuoI3aEN0aciibfXn0AiBuC8lrrUgedI3sfn46Y9JgUUxI5WCvsEPgYbSDQJVcwGco2a_oRxBF_6PugCazz9w"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="absolute bottom-0 left-0 right-0 p-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+<span class="inline-block bg-secondary text-white text-[10px] px-4 py-1.5 font-bold uppercase tracking-widest mb-4">Terminé</span>
+<h4 class="text-white text-3xl font-bold mb-2">Pont de Porto-Novo</h4>
+<p class="text-white/60 font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="location_on">location_on</span>
+                            Porto-Novo, Bénin
+                        </p>
+</div>
+<div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary hover:bg-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Us -->
+<section class="py-xl bg-primary overflow-hidden reveal-on-scroll">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-lg items-center">
+<div class="relative z-10 reveal-on-scroll">
+<span class="text-secondary font-label-bold uppercase tracking-[0.2em] text-xs">Pourquoi Nous Choisir</span>
+<h2 class="font-headline-xl text-white mt-6 mb-10 leading-tight">La Rigueur au Service de vos Ambitions</h2>
+<p class="font-body-lg text-white/60 mb-12 leading-relaxed">Nous ne construisons pas seulement des structures ; nous bâtissons la confiance à travers une exécution technique irréprochable et un engagement envers la durabilité.</p>
+<div class="space-y-10">
+<div class="flex items-start gap-6 group cursor-default">
+<div class="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-secondary group-hover:scale-110 transition-all duration-500">
+<span class="material-symbols-outlined text-secondary group-hover:text-white transition-colors duration-300" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h5 class="font-headline-md text-white text-xl mb-2 group-hover:text-secondary transition-colors">Expertise Locale &amp; Terrain</h5>
+<p class="font-body-md text-white/50">Une connaissance approfondie des sols et des normes spécifiques du Bénin pour des fondations inébranlables.</p>
+</div>
+</div>
+<div class="flex items-start gap-6 group cursor-default">
+<div class="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-secondary group-hover:scale-110 transition-all duration-500">
+<span class="material-symbols-outlined text-secondary group-hover:text-white transition-colors duration-300" data-icon="verified">verified</span>
+</div>
+<div>
+<h5 class="font-headline-md text-white text-xl mb-2 group-hover:text-secondary transition-colors">Qualité Sans Compromis</h5>
+<p class="font-body-md text-white/50">Utilisation de matériaux certifiés et respect rigoureux des standards de sécurité internationaux (ISO).</p>
+</div>
+</div>
+<div class="flex items-start gap-6 group cursor-default">
+<div class="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-secondary group-hover:scale-110 transition-all duration-500">
+<span class="material-symbols-outlined text-secondary group-hover:text-white transition-colors duration-300" data-icon="schedule">schedule</span>
+</div>
+<div>
+<h5 class="font-headline-md text-white text-xl mb-2 group-hover:text-secondary transition-colors">Respect Absolu des Délais</h5>
+<p class="font-body-md text-white/50">Planification optimisée et gestion de projet Agile pour garantir une livraison ponctuelle, à chaque fois.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative lg:pl-12 reveal-on-scroll delay-200">
+<div class="relative z-10 aspect-[4/5] overflow-hidden rounded-sm group">
+<img alt="Construction Manager" class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-[1.5s]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8RSxOXXNGXK7Clxmvho5KKuijnQG7vhQ7v08GgV1B8_1DSAukx_cSnyLA_WVhnyR4YMDEMgmIjYVKBLMcB6nvRmuyJRlUjhxXR9H-FjY5YMPSfRf_HLT1Wn4PS2TCp8JrA0swv99JYRTWC7TLsUgfInTMB1_FXDWeiY0e772lWluD6iQeiEzeJkS0SGvSjdxNbwv-Gf_zK4jVG1fe7K77WEb-kTnFQxxh1Vx5cg_pXg2DmH7T2FoZGv-J8Iqhc1jnozwjs1REHZI"/>
+<div class="absolute inset-0 border-[20px] border-secondary/20 m-6 pointer-events-none transition-all duration-700 group-hover:border-secondary/40 group-hover:scale-95"></div>
+</div>
+<!-- Experience Badge -->
+<div class="absolute -bottom-8 -left-8 z-20 bg-secondary p-10 text-white shadow-2xl transition-transform duration-700 hover:scale-110 cursor-default">
+<div class="text-6xl font-black mb-2 animate-pulse">10+</div>
+<div class="text-xs uppercase tracking-[0.2em] font-bold">Années d'Excellence</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-secondary/10 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-xl bg-white overflow-hidden reveal-on-scroll">
+<div class="max-w-7xl mx-auto px-8">
+<div class="bg-primary flex flex-col lg:flex-row shadow-2xl reveal-on-scroll">
+<div class="lg:w-1/2 p-lg lg:p-xl bg-white text-primary">
+<span class="text-secondary font-label-bold uppercase tracking-[0.2em] text-xs">Contactez-nous</span>
+<h2 class="font-headline-lg mt-4 mb-6">Prêt à Lancer votre Projet ?</h2>
+<p class="font-body-md text-slate-500 mb-10">Nos experts sont à votre disposition pour une étude personnalisée et un devis adapté à vos besoins spécifiques.</p>
+<form class="space-y-8">
+<div class="relative group">
+<input class="w-full border-b-2 border-slate-200 focus:border-secondary transition-all duration-300 py-4 bg-transparent outline-none font-medium placeholder:text-slate-300" placeholder="Nom Complet" type="text"/>
+</div>
+<div class="relative group">
+<input class="w-full border-b-2 border-slate-200 focus:border-secondary transition-all duration-300 py-4 bg-transparent outline-none font-medium placeholder:text-slate-300" placeholder="Adresse Email" type="email"/>
+</div>
+<div class="relative group">
+<textarea class="w-full border-b-2 border-slate-200 focus:border-secondary transition-all duration-300 py-4 bg-transparent outline-none font-medium placeholder:text-slate-300 resize-none" placeholder="Description du Projet" rows="4"></textarea>
+</div>
+<button class="w-full bg-secondary text-white py-6 font-label-bold uppercase tracking-[0.2em] hover:bg-primary transition-all duration-500 shadow-lg hover:shadow-2xl transform active:scale-[0.98] relative overflow-hidden group/btn">
+<span class="relative z-10">Envoyer la Demande</span>
+<div class="absolute inset-0 bg-primary-container translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-500"></div>
+</button>
+</form>
+</div>
+<div class="lg:w-1/2 relative min-h-[500px] group overflow-hidden">
+<img alt="Map Overlay" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay grayscale group-hover:scale-110 transition-transform duration-[3s]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv15he9aDvakp_-dQa3mFTTtk1LH9Wi1eBRP3xmg2UG9sQf9Ltu-gi5NAW32YZqnqIfdQO3w9hwTHQNb_WzP_O0s6AszP5JXVPXujIG5sEuxCw352o_vTCe1_GGXfAtis5FNwa_c7WG9zF-MKQijjlBzM_kvcG2w8d7fNLHD5kYL1Gq_cSdIJPT2T8j66IgtQNu8NC4-3VCpGEp08Aw5OjsHZ8AWopWz6UxxshL77P4JX9tvMRWdK1W9U7du634KE_9Y5RfFdelZA"/>
+<div class="absolute inset-0 flex items-center justify-center p-12">
+<div class="bg-white/95 backdrop-blur-md p-10 shadow-2xl max-w-sm w-full border-t-4 border-secondary transition-transform duration-500 group-hover:-translate-y-2">
+<h4 class="font-headline-md text-primary mb-6">Notre Siège</h4>
+<div class="space-y-6">
+<div class="flex gap-4 group/item">
+<span class="material-symbols-outlined text-secondary transition-transform group-hover/item:scale-125" data-icon="location_on">location_on</span>
+<p class="font-body-md text-slate-700">Zone Résidentielle, Lot 452<br/>Cotonou, République du Bénin</p>
+</div>
+<div class="flex gap-4 items-center group/item">
+<span class="material-symbols-outlined text-secondary transition-transform group-hover/item:scale-125" data-icon="phone">phone</span>
+<p class="font-body-md text-slate-700 font-bold">+229 21 00 00 00</p>
+</div>
+<div class="flex gap-4 items-center group/item">
+<span class="material-symbols-outlined text-secondary transition-transform group-hover/item:scale-125" data-icon="mail">mail</span>
+<p class="font-body-md text-slate-700">contact@skybenin.bj</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-white pt-24 pb-12 overflow-hidden relative">
+<!-- Decorative Pattern -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-secondary/5 -skew-x-12 transform translate-x-1/2"></div>
+<div class="max-w-7xl mx-auto px-8 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-8 mb-24">
+<div class="col-span-1">
+<div class="flex items-center gap-3 mb-8">
+<img alt="Sky Benin" class="h-10 w-auto brightness-0 invert" src="https://lh3.googleusercontent.com/aida/ADBb0uh44uQf7YXJPA8yfEWxu-Ao9RwKln2wSCBCaHW4_K_grgKptQa1sclmADM2n9D8Dq9a6TtNwEiFhIUpv842salS7QaU6ip6FUEME6FHSpwnKWyORdp5cFBptkfXrHkJgn6HxYykNOadnNTjiLzyEecVL6e7QJl6GloK0pDxPsCpBOmkmzisYen4CPQWoD0nud4w4y4b_j8UUB7OWmnH0Duo2SoEL_lME3Sl7sz2lUuaexdOKtXZ8OPFReMUB2lp2Ksd4OnxmW5-"/>
+<span class="text-2xl font-black tracking-tighter">SKY BENIN</span>
+</div>
+<p class="text-white/50 leading-relaxed mb-8">Leader de la construction au Bénin, nous façonnons l'avenir urbain avec audace, précision et intégrité.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all hover:scale-110" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="link">link</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all hover:scale-110" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="link">link</span>
+</a>
+</div>
+</div>
+<div class="col-span-1">
+<h5 class="text-xs font-bold uppercase tracking-[0.2em] mb-8 text-secondary">Expertises</h5>
+<ul class="space-y-4">
+<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2 group" href="#"><span class="w-1 h-1 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-all group-hover:w-3"></span> Construction</a></li>
+<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2 group" href="#"><span class="w-1 h-1 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-all group-hover:w-3"></span> Travaux Publics</a></li>
+<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2 group" href="#"><span class="w-1 h-1 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-all group-hover:w-3"></span> Génie Civil</a></li>
+<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2 group" href="#"><span class="w-1 h-1 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-all group-hover:w-3"></span> Rénovation</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h5 class="text-xs font-bold uppercase tracking-[0.2em] mb-8 text-secondary">Société</h5>
+<ul class="space-y-4">
+<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2 group" href="#"><span class="w-1 h-1 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-all group-hover:w-3"></span> À Propos</a></li>
+<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2 group" href="#"><span class="w-1 h-1 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-all group-hover:w-3"></span> Réalisations</a></li>
+<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2 group" href="#"><span class="w-1 h-1 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-all group-hover:w-3"></span> Sécurité &amp; HSE</a></li>
+<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2 group" href="#"><span class="w-1 h-1 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-all group-hover:w-3"></span> Carrières</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h5 class="text-xs font-bold uppercase tracking-[0.2em] mb-8 text-secondary">Newsletter</h5>
+<p class="text-white/50 mb-6 text-sm">Abonnez-vous pour suivre l'évolution de nos chantiers phares.</p>
+<div class="flex border-b border-white/20 pb-2 group/input">
+<input class="bg-transparent border-none p-0 w-full focus:ring-0 text-sm placeholder:text-white/20" placeholder="Votre Email" type="email"/>
+<button class="text-secondary hover:text-white transition-all group-hover/input:translate-x-1">
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-white/30 text-xs tracking-wider">© 2024 Sky Benin Construction. Excellence through Precision.</p>
+<div class="flex gap-10 text-[10px] font-bold uppercase tracking-widest text-white/40">
+<a class="hover:text-secondary transition-colors" href="#">Politique de Confidentialité</a>
+<a class="hover:text-secondary transition-colors" href="#">Mentions Légales</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Once visible, we can stop observing to preserve performance
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Suble Parallax on Hero
+        const heroBg = document.getElementById('hero-parallax');
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.pageYOffset;
+            if (scrollPos < window.innerHeight) {
+                // Move bg image at 1/3 speed of scroll
+                heroBg.style.transform = `translateY(${scrollPos * 0.3}px)`;
+            }
+        });
+        
+        // Header scroll effect
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                header.classList.add('h-20', 'shadow-xl', 'bg-white/95');
+                header.classList.remove('h-24', 'bg-white/90');
+            } else {
+                header.classList.remove('h-20', 'shadow-xl', 'bg-white/95');
+                header.classList.add('h-24', 'bg-white/90');
+            }
+        });
+    });
+
+    // Keyframes for custom initial animations
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+</body></html>
