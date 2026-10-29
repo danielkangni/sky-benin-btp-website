@@ -45,3 +45,12 @@ model SiteContent {
   key   String @unique
   value String
 }
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

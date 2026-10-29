@@ -17,12 +17,11 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.2",
     "@prisma/client": "^5.22.0",
     "bcryptjs": "^2.4.3",
     "gsap": "^3.12.5",
     "next": "^15.1.6",
-    "next-auth": "5.0.0-beta.25",
+    "next-auth": "^5.0.0-beta.32",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.4.1",

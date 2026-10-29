@@ -47,12 +47,28 @@ export default function Contact({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulated submit — wire up to a real endpoint or email service
-    setTimeout(() => {
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          message: data.get('message'),
+          consent: data.get('consent') === 'on',
+        }),
+      });
+      if (!res.ok) throw new Error('request failed');
       toast.success('Message envoyé ! Nous vous répondrons sous 24h.');
-      (e.target as HTMLFormElement).reset();
+      form.reset();
+    } catch {
+      toast.error("Échec de l'envoi. Réessayez ou contactez-nous par téléphone.");
+    } finally {
       setSubmitting(false);
-    }, 800);
+    }
   };
 
   return (
@@ -71,27 +87,58 @@ export default function Contact({
               vos besoins spécifiques.
             </p>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <input
-                required
-                name="name"
-                type="text"
-                placeholder="Nom Complet"
-                className="w-full border-b-2 border-slate-200 focus:border-secondary transition-all duration-300 py-4 bg-transparent outline-none font-medium placeholder:text-slate-300"
-              />
-              <input
-                required
-                name="email"
-                type="email"
-                placeholder="Adresse Email"
-                className="w-full border-b-2 border-slate-200 focus:border-secondary transition-all duration-300 py-4 bg-transparent outline-none font-medium placeholder:text-slate-300"
-              />
-              <textarea
-                required
-                name="message"
-                rows={4}
-                placeholder="Description du Projet"
-                className="w-full border-b-2 border-slate-200 focus:border-secondary transition-all duration-300 py-4 bg-transparent outline-none font-medium placeholder:text-slate-300 resize-none"
-              />
+              <div>
+                <label htmlFor="contact-name" className="sr-only">
+                  Nom complet
+                </label>
+                <input
+                  required
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="Nom Complet"
+                  className="w-full border-b-2 border-slate-200 focus:border-secondary transition-all duration-300 py-4 bg-transparent outline-none font-medium placeholder:text-slate-300"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-email" className="sr-only">
+                  Adresse email
+                </label>
+                <input
+                  required
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="Adresse Email"
+                  className="w-full border-b-2 border-slate-200 focus:border-secondary transition-all duration-300 py-4 bg-transparent outline-none font-medium placeholder:text-slate-300"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="sr-only">
+                  Description du projet
+                </label>
+                <textarea
+                  required
+                  id="contact-message"
+                  name="message"
+                  rows={4}
+                  placeholder="Description du Projet"
+                  className="w-full border-b-2 border-slate-200 focus:border-secondary transition-all duration-300 py-4 bg-transparent outline-none font-medium placeholder:text-slate-300 resize-none"
+                />
+              </div>
+              <label htmlFor="contact-consent" className="flex items-start gap-3 text-xs text-slate-500">
+                <input
+                  required
+                  id="contact-consent"
+                  name="consent"
+                  type="checkbox"
+                  className="mt-0.5 h-4 w-4 accent-secondary shrink-0"
+                />
+                J&apos;accepte que mes informations soient utilisées par Sky Benin BTP pour me
+                recontacter au sujet de ma demande.
+              </label>
               <button
                 disabled={submitting}
                 type="submit"
@@ -107,7 +154,8 @@ export default function Contact({
           <div className="lg:w-1/2 relative min-h-[500px] group overflow-hidden">
             <img
               src={imageUrl}
-              alt="Map Overlay"
+              alt=""
+              aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay grayscale group-hover:scale-110 transition-transform duration-[3s]"
             />
             <div className="absolute inset-0 bg-primary/30" />

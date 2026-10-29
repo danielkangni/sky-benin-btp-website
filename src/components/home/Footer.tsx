@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 export default function Footer({
   about,
   copyright,
@@ -95,15 +97,18 @@ export default function Footer({
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-white/30 text-xs tracking-wider">{copyright}</p>
           <div className="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-white/40">
-            <a href="#" className="hover:text-secondary transition-colors">
+            <Link href="/politique-de-confidentialite" className="hover:text-secondary transition-colors">
               Politique de Confidentialité
-            </a>
-            <a href="#" className="hover:text-secondary transition-colors">
+            </Link>
+            <Link href="/conditions-generales" className="hover:text-secondary transition-colors">
+              Conditions Générales
+            </Link>
+            <Link href="/mentions-legales" className="hover:text-secondary transition-colors">
               Mentions Légales
-            </a>
-            <a href="/admin" className="hover:text-secondary transition-colors">
+            </Link>
+            <Link href="/admin" className="hover:text-secondary transition-colors">
               Admin
-            </a>
+            </Link>
           </div>
         </div>
       </div>

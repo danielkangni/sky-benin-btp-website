@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { prisma } from './prisma';
+import { rateLimit } from './rate-limit';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: 'jwt' },
@@ -18,6 +19,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const email = credentials?.email as string;
         const password = credentials?.password as string;
         if (!email || !password) return null;
+
+        if (!rateLimit(`login:${email.toLowerCase()}`, 5, 15 * 60 * 1000)) {
+          throw new Error('Trop de tentatives, réessayez dans 15 minutes.');
+        }
 
         const admin = await prisma.admin.findUnique({ where: { email } });
         if (!admin) return null;
